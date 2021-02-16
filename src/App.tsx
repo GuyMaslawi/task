@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Link, useHistory } from "react-router-dom";
 import { Login, OrganizationUsers } from './pages';
-import { Content } from './AppStyle';
 import { connect } from 'react-redux';
 
 export const App = (state: any) => {
@@ -9,29 +8,28 @@ export const App = (state: any) => {
   const history = useHistory();
 
   const routes = [
-    {path: '/', component: <Login/>},
-    {path: '/users', component: <OrganizationUsers />}
-  ]
+    { path: '/', component: <Login /> },
+    { path: '/users', component: <OrganizationUsers /> }
+  ];
 
   useEffect(() => {
     if (isLoggedIn) {
-      debugger;
       history.push('/users');
     } else {
       history.push('/');
     }
-  },[isLoggedIn]);
+  }, [isLoggedIn]);
 
   return (
-        <Switch>
-          {routes.map((route: {path: string, component: React.ReactNode}) => {
-            return (
-              <Route key={route.path} exact path={route.path}>
-                {route.component}
-              </Route>
-            )
-          })}
-        </Switch>
+    <Switch>
+      {routes.map((route: { path: string, component: React.ReactNode }) => {
+        return (
+          <Route key={route.path} exact path={route.path}>
+            {route.component}
+          </Route>
+        )
+      })}
+    </Switch>
   );
 };
 

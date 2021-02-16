@@ -2,8 +2,7 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import { Card, Logo, InputText } from '../../components';
 import axios from 'axios';
-import { connect, useDispatch } from 'react-redux';
-import { login } from '../../redux/action/actionLogin';
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
@@ -45,7 +44,7 @@ export const Login = () => {
             email: data.Email,
             password: data.Password
         })
-        dispatch({type: "LOGIN"});
+        dispatch({ type: "LOGIN" });
     };
 
     return (
@@ -63,13 +62,13 @@ export const Login = () => {
                             </Grid>
                             <Grid item xs>
                                 <Controller control={control}
-                                            defaultValue=""
-                                            name="Email"                                   
-                                            ref={register}
-                                            render={({ onChange, value }) => 
-                                                <InputText helperText={errors.Email ? "please enter your email" : ""} 
-                                                label="Email" onChange={onChange} value={value} />
-                                            }  
+                                    defaultValue=""
+                                    name="Email"
+                                    ref={register}
+                                    render={({ onChange, value }) =>
+                                        <InputText helperText={errors.Email ? "please enter your email" : ""}
+                                            label="Email" onChange={onChange} value={value} />
+                                    }
                                 />
                             </Grid>
                         </Grid>
@@ -81,14 +80,14 @@ export const Login = () => {
                                 <LockOutlinedIcon color="secondary" />
                             </Grid>
                             <Grid item xs>
-                                <Controller control={control} 
-                                            defaultValue=""
-                                            name="Password"                                 
-                                            ref={register}
-                                            render={({ onChange, value }) => 
-                                                <InputText type="password" helperText={errors.Password ? "please enter your password" : ""} 
-                                                label="Password" onChange={onChange} value={value} />
-                                            }  
+                                <Controller control={control}
+                                    defaultValue=""
+                                    name="Password"
+                                    ref={register}
+                                    render={({ onChange, value }) =>
+                                        <InputText type="password" helperText={errors.Password ? "please enter your password" : ""}
+                                            label="Password" onChange={onChange} value={value} />
+                                    }
                                 />
                             </Grid>
                         </Grid>

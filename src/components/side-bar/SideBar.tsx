@@ -1,15 +1,14 @@
 import React from 'react';
-import { 
-    LogoutWrap, 
-    UserTabWrap, 
-    UsersTab, 
-    LogoutButton, 
-    OpenArrow, 
-    Wrapper 
+import {
+    LogoutWrap,
+    UserTabWrap,
+    UsersTab,
+    LogoutButton,
+    OpenArrow,
+    Wrapper
 } from './SideBarStyle';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
-import { connect, useDispatch } from 'react-redux';
-import { login } from '../../redux/action/actionLogin';
+import { useDispatch } from 'react-redux';
 
 // icons
 import user from '../../assets/icons/user.svg';
@@ -19,16 +18,13 @@ export const SideBar = () => {
     const dispatch = useDispatch();
 
     const logout = () => {
-        dispatch({
-            type: "LOGIN",
-            payload: login(false)
-        });
+        dispatch({ type: "LOGOUT" });
     };
 
     return (
         <Wrapper>
             <OpenArrow>
-                <ArrowForwardIosOutlinedIcon color="secondary"/>
+                <ArrowForwardIosOutlinedIcon color="secondary" />
             </OpenArrow>
             <UsersTab>
                 <UserTabWrap>
