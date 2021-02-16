@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import { Switch, Route, Link, useHistory } from "react-router-dom";
+import { Login, OrganizationUsers } from './pages';
+import { Content } from './AppStyle';
+import { connect } from 'react-redux';
 
-function App() {
+export const App = (state: any) => {
+  const isLoggedIn = state.login.isLogin;
+  const history = useHistory();
+
+  const routes = [
+    {path: '/', component: <Login/>},
+    {path: '/users', component: <OrganizationUsers />}
+  ]
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      debugger;
+      history.push('/users');
+    } else {
+      history.push('/');
+    }
+  },[isLoggedIn]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Switch>
+          {routes.map((route: {path: string, component: React.ReactNode}) => {
+            return (
+              <Route key={route.path} exact path={route.path}>
+                {route.component}
+              </Route>
+            )
+          })}
+        </Switch>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state: any) => ({
+  login: state.login
+});
+
+export default connect(mapStateToProps)(App);
